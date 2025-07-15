@@ -4,6 +4,7 @@ import pytest
 from pywinauto.application import Application
 from pywinauto import Desktop
 from ui_helper import UIHelper
+from pages.button_page import ButtonPage
 
 @pytest.fixture(scope="session")
 def helper():
@@ -21,18 +22,15 @@ def helper():
     return UIHelper(main_win)
 
 def test_button_click(helper):
-    helper.wait_and_click("Basic input", "ListItem", found_index=0)
-    helper.wait_and_click("Button", "ListItem")
-    helper.wait_and_click("Standard XAML", "Button", found_index=0)
-
-    result = helper.get_wrapper("You clicked: Button1", "Text")
-    assert result is not None, "Result text not found"
-    print("Correct output found:", result.window_text())
+    page = ButtonPage(helper.main_win)
+    page.open_basic_input()
+    page.open_button_section()
+    page.click_standard_xaml()
+    result = page.get_result_text()
+    assert result is not None
 
 def test_disable_button(helper):
-    helper.wait_and_click("Disable button", "CheckBox", found_index=0)
-    time.sleep(1)
-
-    wrapper = helper.wait_and_assert_enabled("Standard XAML", "Button", expected_enabled=False)
+    page = ButtonPage(helper.main_win)
+    page.disable_button()
+    wrapper = page.assert_standard_xaml_disabled()
     assert wrapper.is_enabled() is False
-    print(f"Assertion passed: 'Standard XAML' button enabled state is {wrapper.is_enabled()}")
