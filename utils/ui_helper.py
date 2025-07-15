@@ -7,6 +7,7 @@ class UIHelper:
 
     def wait_and_click(self, title, control_type, timeout=10, found_index=0):
         ctrl = self.main_win.child_window(title=title, control_type=control_type, found_index=found_index)
+        time.sleep(0.1) 
         ctrl.wait("enabled visible ready", timeout=timeout)
         ctrl.click_input()
 
