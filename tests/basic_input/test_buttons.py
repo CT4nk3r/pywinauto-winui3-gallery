@@ -1,5 +1,5 @@
-from pages.basic_input.button_page import ButtonPage
 import pytest
+from pages.basic_input.button_page import ButtonPage
 
 @pytest.fixture
 def button_page(helper):

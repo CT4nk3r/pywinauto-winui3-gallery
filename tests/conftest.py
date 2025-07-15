@@ -16,6 +16,9 @@ def helper():
 
     app = Application(backend="uia").connect(handle=chosen_handle)
     main_win = app.window(handle=chosen_handle)
+
+    main_win.maximize()
+
     main_win.set_focus()
 
     return UIHelper(main_win)
