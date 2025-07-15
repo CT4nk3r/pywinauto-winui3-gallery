@@ -1,8 +1,13 @@
-from ui_helper import UIHelper
+from utils.ui_helper import UIHelper
 
 class ButtonPage:
     def __init__(self, main_win):
         self.helper = UIHelper(main_win)
+
+    def reset_to_button_section(self):
+        self.helper.wait_and_click("Home", "ListItem")
+        self.open_basic_input()
+        self.open_button_section()
 
     def open_basic_input(self):
         self.helper.wait_and_click("Basic input", "ListItem", found_index=0)
